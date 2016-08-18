@@ -32,7 +32,6 @@ use Endroid\QrCode\QrCode;
 use NFePHP\Extras\CommonNFePHP;
 use NFePHP\Extras\DocumentoNFePHP;
 use NFePHP\Extras\DomDocumentNFePHP;
-use NFePHP\NFe\ToolsNFe;
 
 /**
  * Classe DanfceNFePHP
@@ -164,8 +163,11 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
         }
         $this->papel = array(80, 'one-page');
         $this->xml          = $docXML;
-        
-        $this->logomarca    = $sPathLogo;
+        if (!empty($sPathLogo)) {
+            $image = $sPathLogo;
+            $imageData = base64_encode(file_get_contents($image));
+            $this->logomarca = "data: " . mime_content_type($image) . ";base64,{$imageData}";
+        }    
         if (!empty($this->xml)) {
             $this->dom = new DomDocumentNFePHP();
             $this->dom->loadXML($this->xml);
@@ -301,7 +303,6 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
      */
     public function montaDANFCE($ecoNFCe = true)
     {
-        $toolsNFe = new ToolsNFe('../../config/config.json');
         //DADOS DA NF
         $dhRecbto = $nProt = '';
         if (isset($this->nfeProc)) {
@@ -324,18 +325,8 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
         $vOutro = $this->pSimpleGetValue($this->ICMSTot, "vOutro");
         $vNF = $this->pSimpleGetValue($this->ICMSTot, "vNF");
         $qtdItens = $this->det->length;
-        if ($this->urlQR == '') {
-            //Busca no XML a URL da Consulta
-            $urlQR = $toolsNFe->zGetUrlQR($cUF, $tpAmb);
-        } else {
-            $urlQR = $this->urlQR;
-        }
+        $urlQR = $this->urlQR;
         //DADOS DO EMITENTE
-        if (empty($this->logomarca)) {
-            $image = $toolsNFe->aConfig['aDocFormat']->pathLogoNFCe;
-            $imageData = base64_encode(file_get_contents($image));
-            $this->logomarca = "data: ".mime_content_type($image).";base64,{$imageData}";
-        }
         $emitRazao  = $this->pSimpleGetValue($this->emit, "xNome");
         $emitCnpj   = $this->pSimpleGetValue($this->emit, "CNPJ");
         $emitCnpj   = $this->pFormat($emitCnpj, "##.###.###/####-##");
