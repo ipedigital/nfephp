@@ -465,7 +465,7 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
         if ($hasAD) {
             $this->html .= "<tr>\n";
             $this->html .= "<td class=\"tLeft\">".htmlspecialchars('Valor a Pagar R$')."</td>\n";
-            $this->html .= "<td class=\"tRight\">".number_format($vOutro, 2, ',', '.')."</td>\n";
+            $this->html .= "<td class=\"tRight\">".number_format($vProd + $vOutro - $vDesc, 2, ',', '.')."</td>\n";
             $this->html .= "</tr>\n";
         }
         // Formas de Pagamentos
