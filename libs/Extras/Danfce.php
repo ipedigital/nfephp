@@ -68,8 +68,8 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
     protected $html;
     protected $css = "<style>
         body {
-            font-family: Times New Roman;
-            font-size: 8pt;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 7pt;
             background: #FFF none repeat scroll 0 0;
             margin: 8px;
         }
@@ -80,12 +80,12 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
             border-bottom: 1px dashed #000;
         }
         table.items {
-            font-size: 8pt;
+            font-size: 7pt;
             border-collapse: collapse;
             border: 3px solid #880000;
         }
         td, th {
-            font-size: 7pt;
+            font-size: 6.5pt;
             vertical-align: top;
             text-align: center;
         }
@@ -93,7 +93,7 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
             font-weight: bold;
         }
         table thead td, table tfoot td {
-            font-size: 7pt;
+            font-size: 6.5pt;
             vertical-align: center;
             text-align: center;
         }
@@ -123,7 +123,7 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
             padding: 0;
         }
         .menor {
-            font-size: 6.5pt;
+            font-size: 6pt;
         }
         .tLeft {
             text-align: left;
@@ -509,15 +509,17 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
             $this->html .= "<br><strong>Via do Consumidor</strong></td>\n";
         }
         $this->html .= "</tr>\n";
-        $this->html .= "<tr>\n";
-        $this->html .= "<td colspan=\"3\">Consulte pela Chave de Acesso em <a href=\"$urlQR\">$urlQR</a></td>\n";
-        $this->html .= "</tr>\n";
+        if(!empty($urlQR)) {
+            $this->html .= "<tr>\n";
+            $this->html .= "<td colspan=\"3\">Consulte pela Chave de Acesso em <a href=\"$urlQR\">$urlQR</a></td>\n";
+            $this->html .= "</tr>\n";
+        }
         $this->html .= "<tr>\n";
         $this->html .= "<td colspan=\"3\">Chave de Acesso<br>{$chNFe}</td>\n";
         $this->html .= "</tr>\n";
         if ($tpEmis == 1) {
             $this->html .= "<tr>\n";
-            $this->html .= "<td colspan=\"3\">Protocolo de autorização: {$nProt} - ".date('d/m/y H:i:s', $tsProt)."</td>\n";
+            $this->html .= "<td colspan=\"3\">Protocolo de autorização: {$nProt} <br/>  ".date('d/m/y H:i:s', $tsProt)."</td>\n";
             $this->html .= "</tr>\n";
         }
         $this->html .= "</table>\n";
