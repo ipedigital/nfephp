@@ -679,11 +679,14 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
         $itensHtml .= "<tr>\n";
         $itensHtml .= "<td>#</td>\n";
         $itensHtml .= "<td>".htmlspecialchars('CÓDIGO')."</td>\n";
-        $itensHtml .= "<td>".htmlspecialchars('DESCRIÇÃO')."</td>\n";
-        $itensHtml .= "<td>QTDE.</td>\n";
+        $itensHtml .= "<td colspan='3' class=\"tLeft\">".htmlspecialchars('DESCRIÇÃO')."</td>\n";
+        $itensHtml .= "</tr>\n";
+        $itensHtml .= "<tr>\n";
+        $itensHtml .= "<td></td>\n";
+        $itensHtml .= "<td class=\"tRight\">QTDE.</td>\n";
         $itensHtml .= "<td>UN.</td>\n";
-        $itensHtml .= "<td>VL.UNIT.</td>\n";
-        $itensHtml .= "<td>VL.TOTAL</td>\n";
+        $itensHtml .= "<td class=\"tRight\">VL.UNIT.</td>\n";
+        $itensHtml .= "<td class=\"tRight\">VL.TOTAL</td>\n";
         $itensHtml .= "</tr>\n";
         $itensHtml .= "</thead>\n";
         foreach ($det as $detI) {
@@ -699,7 +702,10 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
             $itensHtml .=  "<tr>\n";
             $itensHtml .=  "<td class=\"tLeft\">".htmlspecialchars($nitem)."</td>\n";
             $itensHtml .=  "<td class=\"tLeft\">".htmlspecialchars($cProd)."</td>\n";
-            $itensHtml .=  "<td class=\"tLeft\">".htmlspecialchars($xProd)."</td>\n";
+            $itensHtml .=  "<td colspan='3' class=\"tLeft\">".htmlspecialchars($xProd)."</td>\n";
+            $itensHtml .=  "</tr>\n";
+            $itensHtml .=  "<tr>\n";
+            $itensHtml .=  "<td></td>\n";
             $itensHtml .=  "<td class=\"tRight\">$qCom</td>\n";
             $itensHtml .=  "<td>$uCom</td>\n";
             $itensHtml .=  "<td class=\"tRight\">".htmlspecialchars($vUnCom)."</td>\n";
