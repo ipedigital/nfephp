@@ -309,30 +309,26 @@ ATENÇÃO!!! Vários endereços destes webservices ainda não foram totalmente
   </UF>  
   <UF>
     <sigla>PE</sigla>
-    <homologacao>
-      <NfeInutilizacao method="nfeInutilizacaoNF2" operation="" version="3.10"></NfeInutilizacao>
-      <NfeConsultaProtocolo method="nfeConsultaNF2" operation="" version="3.10"></NfeConsultaProtocolo>
-      <NfeStatusServico method="nfeStatusServicoNF2" operation="" version="3.10"></NfeStatusServico>
-      <NfeConsultaCadastro method="consultaCadastro2" operation="" version="3.10"></NfeConsultaCadastro>
-      <RecepcaoEvento method="nfeRecepcaoEvento" operation="" version="3.10"></RecepcaoEvento>
-      <NfeConsultaQR method="QR-CODE" operation="NfeConsultaQR" version="100"></NfeConsultaQR>
-      <NfeConsultaDest method="nfeConsultaNFDest" operation="" version="3.10"></NfeConsultaDest>
-      <NfeDownloadNF method="nfeDownloadNF" operation="" version="3.10"></NfeDownloadNF>
-      <RecepcaoEPEC method="nfeRecepcaoEvento" operation="RecepcaoEvento" version="1.00"></RecepcaoEPEC>
-      <NfeStatusEPEC method="nfeStatusServicoNF2" operation="NfeStatusServico2" version="3.10"></NfeStatusEPEC>       
-    </homologacao>
-    <producao>
-      <NfeInutilizacao method="nfeInutilizacaoNF2" operation="" version="3.10"></NfeInutilizacao>
-      <NfeConsultaProtocolo method="nfeConsultaNF2" operation="" version="3.10"></NfeConsultaProtocolo>
-      <NfeStatusServico method="nfeStatusServicoNF2" operation="" version="3.10"></NfeStatusServico>
-      <NfeConsultaCadastro method="consultaCadastro2" operation="" version="3.10"></NfeConsultaCadastro>
-      <RecepcaoEvento method="nfeRecepcaoEvento" operation="" version="3.10"></RecepcaoEvento>
-      <NfeConsultaQR method="QR-CODE" operation="NfeConsultaQR" version="100"></NfeConsultaQR>
-      <NfeConsultaDest method="nfeConsultaNFDest" operation="" version="3.10"></NfeConsultaDest>
-      <NfeDownloadNF method="nfeDownloadNF" operation="" version="3.10"></NfeDownloadNF>
-      <RecepcaoEPEC method="nfeRecepcaoEvento" operation="RecepcaoEvento" version="1.00"></RecepcaoEPEC>
-      <NfeStatusEPEC method="nfeStatusServicoNF2" operation="NfeStatusServico2" version="3.10"></NfeStatusEPEC>       
-    </producao>
+      <homologacao>
+          <NfeAutorizacao method="nfeAutorizacaoLote" operation="NfeAutorizacao" version="3.10">https://nfcehomolog.sefaz.pe.gov.br/nfe-service/services/NfeAutorizacao</NfeAutorizacao>
+          <NfeRetAutorizacao method="nfeRetAutorizacaoLote" operation="NfeRetAutorizacao" version="3.10">https://nfcehomolog.sefaz.pe.gov.br/nfe-service/services/NfeRetAutorizacao</NfeRetAutorizacao>
+          <NfeInutilizacao  method="nfeInutilizacaoNF2" operation="NfeInutilizacao" version="3.10">https://nfcehomolog.sefaz.pe.gov.br/nfe-service/services/NfeInutilizacao2</NfeInutilizacao>
+          <NfeStatusEPEC method="nfeStatusServicoNF2" operation="NfeStatusServico2" version="3.10">https://nfcehomolog.sefaz.pe.gov.br/nfe-service/services/NfeStatusServico2</NfeStatusEPEC>
+          <NfeConsultaProtocolo method="nfeConsultaNF2" operation="NfeConsulta2" version="3.10">https://nfcehomolog.sefaz.pe.gov.br/nfe-service/services/NfeConsulta2</NfeConsultaProtocolo>
+          <NfeConsultaCadastro method="consultaCadastro2" operation="NfeConsultaCadastro" version="3.10">https://nfcehomolog.sefaz.pe.gov.br/nfe-service/services/CadConsultaCadastro2</NfeConsultaCadastro>
+          <RecepcaoEPEC method="nfeRecepcaoEvento" operation="RecepcaoEvento" version="3.10">https://nfcehomolog.sefaz.pe.gov.br/nfe-service/services/RecepcaoEvento</RecepcaoEPEC>
+          <NfeConsultaQR method="QR-CODE" operation="NfeConsultaQR" version="100">http://nfcehomolog.sefaz.pe.gov.br/nfce-web/consultarNFCe</NfeConsultaQR>
+      </homologacao>
+      <producao>
+          <NfeAutorizacao method="nfeAutorizacaoLote" operation="NfeAutorizacao" version="3.10">https://nfce.sefaz.pe.gov.br/nfe-service/services/NfeAutorizacao</NfeAutorizacao>
+          <NfeRetAutorizacao method="nfeRetAutorizacaoLote" operation="NfeRetAutorizacao" version="3.10">https://nfce.sefaz.pe.gov.br/nfe-service/services/NfeRetAutorizacao</NfeRetAutorizacao>
+          <NfeInutilizacao  method="nfeInutilizacaoNF2" operation="NfeInutilizacao" version="3.10">https://nfce.sefaz.pe.gov.br/nfe-service/services/NfeInutilizacao2</NfeInutilizacao>
+          <NfeStatusEPEC method="nfeStatusServicoNF2" operation="NfeStatusServico2" version="3.10">https://nfce.sefaz.pe.gov.br/nfe-service/services/NfeStatusServico2</NfeStatusEPEC>
+          <NfeConsultaProtocolo method="nfeConsultaNF2" operation="NfeConsulta2" version="3.10">https://nfce.sefaz.pe.gov.br/nfe-service/services/NfeConsulta2</NfeConsultaProtocolo>
+          <NfeConsultaCadastro method="consultaCadastro2" operation="NfeConsultaCadastro" version="3.10">https://nfce.sefaz.pe.gov.br/nfe-service/services/CadConsultaCadastro2</NfeConsultaCadastro>
+          <RecepcaoEPEC method="nfeRecepcaoEvento" operation="RecepcaoEvento" version="1.00">https://nfce.sefaz.pe.gov.br/nfe-service/services/RecepcaoEvento</RecepcaoEPEC>
+          <NfeConsultaQR method="QR-CODE" operation="NfeConsultaQR" version="100">http://nfce.sefaz.pe.gov.br/nfce-web/consultarNFCe</NfeConsultaQR>
+      </producao>
   </UF>
  <UF>
     <sigla>PR</sigla>
