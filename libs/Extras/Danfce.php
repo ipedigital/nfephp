@@ -424,6 +424,8 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
         $this->html .= "<tr>\n";
         $this->html .= "<td colspan=\"3\" class=\"tCenter\"><strong>".
                 htmlspecialchars("DANFE NFC-e - Documento Auxiliar da Nota Fiscal de Consumidor Eletrônica")."</strong></td>\n";
+        $this->html .= "</tr>\n";
+        $this->html .= "<tr>\n";
         $this->html .= "<td colspan=\"3\" class=\"tCenter\"><strong>".
                 htmlspecialchars("Não permite aproveitamento de crédito de ICMS")."</strong></td>\n";
         $this->html .= "</tr>\n";
