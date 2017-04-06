@@ -898,7 +898,12 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
         if (strpos($url, '?') === false) {
             $seq = $url.'?'.$seq;
         } else {
-            $seq = $url.''.$seq;
+            if (strpos($url, '=') === false) {
+                $seq = $url . '' . $seq;
+            }
+            else {
+                $seq = $url . '&' . $seq;
+            }
         }
         return self::imgQR($seq);
     }
