@@ -2225,6 +2225,9 @@ class ToolsNFe extends BaseTools
         if (strpos($url, '?') === false) {
             $url = $url.'?';
         }
+        else if (!(strpos($url, '=') === false)) {
+            $url = $url.'&';
+        }
         $seq = $url.$seq;
         return $seq;
     }
