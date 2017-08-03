@@ -2394,7 +2394,7 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
         $this->pTextBox($x, $y, $w, $h, $texto, $aFont, 'T', 'L', 0, '');
         $y += 3;
         //desenha a caixa dos dados dos itens da NF
-        $hmax += 1;
+
         $texto = '';
         $this->pTextBox($x, $y, $w, $hmax);
         //##################################################################################
