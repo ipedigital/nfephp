@@ -1153,6 +1153,15 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
             } elseif ($this->logoAlign=='C') {
                 $nImgH = round($h/3, 0);
                 $nImgW = round($logoWmm * ($nImgH/$logoHmm), 0);
+
+                // Verificando se a largura da logo após o ajuste vertical é maior que o espaço disponível
+                if ($nImgW > ($w - 2)) {
+                    // É maior, diminuir a largura com folga de 1 mm de cada lado
+                    // a ajustar a altura proporcionalmente
+                    $nImgW = $w - 2;
+                    $nImgH = round($logoHmm * ($nImgW / $logoWmm), 0);
+                }
+
                 $xImg = round(($w-$nImgW)/2+$x, 0);
                 $yImg = $y+3;
                 $x1 = $x;
