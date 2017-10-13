@@ -377,10 +377,10 @@ ATENÇÃO!!! Vários endereços destes webservices ainda não foram totalmente
   <UF>
     <sigla>RO</sigla>
     <homologacao>
-       <NfeConsultaQR method="QR-CODE" operation="NfeConsultaQR" version="100">http://www.nfce.sefin.ro.gov.br/consultanfce/consulta.jsp</NfeConsultaQR>
+       <NfeConsultaQR method="QR-CODE" operation="NfeConsultaQR" version="100">https://www.nfce.sefin.ro.gov.br/consultanfce/consulta.jsp</NfeConsultaQR>
     </homologacao>
     <producao>
-       <NfeConsultaQR method="QR-CODE" operation="NfeConsultaQR" version="100">http://www.nfce.sefin.ro.gov.br/consultanfce/consulta.jsp</NfeConsultaQR>
+       <NfeConsultaQR method="QR-CODE" operation="NfeConsultaQR" version="100">https://www.nfce.sefin.ro.gov.br/consultanfce/consulta.jsp</NfeConsultaQR>
     </producao>
   </UF>
   <UF>
