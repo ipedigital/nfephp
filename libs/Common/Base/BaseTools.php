@@ -656,7 +656,7 @@ class BaseTools
             'PA'=>'SVAN',
             'PB'=>'SVRS',
             'PE'=>'PE',
-            'PI'=>'SVAN',
+            'PI'=>'SVRS',
             'PR'=>'PR',
             'RJ'=>'SVRS',
             'RN'=>'SVRS',
