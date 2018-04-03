@@ -2593,9 +2593,9 @@ class MakeNFe extends BaseMake
             "[item $nItem] Valor do ICMS de partilha para a UF do remetente"
         );
         $this->aICMSUFDest[$nItem] = $icmsUFDest;
-        $this->aTotICMSUFDest['vICMSUFDest'] += $vICMSUFDest;
-        $this->aTotICMSUFDest['vFCPUFDest'] += $vFCPUFDest;
-        $this->aTotICMSUFDest['vICMSUFRemet'] += $vICMSUFRemet;
+        $this->aTotICMSUFDest['vICMSUFDest'] = (float)$this->aTotICMSUFDest['vICMSUFDest'] + $vICMSUFDest;
+        $this->aTotICMSUFDest['vFCPUFDest'] = (float)$this->aTotICMSUFDest['vFCPUFDest'] + $vFCPUFDest;
+        $this->aTotICMSUFDest['vICMSUFRemet'] = (float)$this->aTotICMSUFDest['vICMSUFRemet'] + $vICMSUFRemet;
         return $icmsUFDest;
     }
     
