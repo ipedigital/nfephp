@@ -61,7 +61,8 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 	protected $qrCode;
 	protected $det;
 	protected $pag;
-	protected $dest;
+    protected $vTroco;
+    protected $dest;
 	protected $infCpl;
 	protected $infAdFisco;
 	protected $mPDF;
@@ -180,10 +181,21 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 			$this->enderEmit  = $this->dom->getElementsByTagName("enderEmit")->item(0);
 			$this->det        = $this->dom->getElementsByTagName("det");
 			$this->dest       = $this->dom->getElementsByTagName("dest")->item(0);
-			$this->pag        = $this->dom->getElementsByTagName("pag");
 			$this->imposto    = $this->dom->getElementsByTagName("imposto")->item(0);
 			$this->ICMSTot    = $this->dom->getElementsByTagName("ICMSTot")->item(0);
-		}
+
+            //se for o layout 4.0 busca pelas tags de detalhe do pagamento
+            //senao, busca pelas tags de pagamento principal
+            if ($this->infNFe->getAttribute("versao") == "4.00") {
+                $this->pag = $this->dom->getElementsByTagName("detPag");
+
+                $tagPag = $this->dom->getElementsByTagName("pag")->item(0);
+                $this->vTroco = $this->pSimpleGetValue($tagPag, "vTroco");
+            } else {
+                $this->pag = $this->dom->getElementsByTagName("pag");
+            }
+
+        }
 		$this->idToken = $idToken;
 		$this->emitToken = $emitToken;
 		if ($urlQR != '') {
@@ -479,7 +491,7 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 		// Formas de Pagamentos
 		$this->html .= "<tr>\n";
 		$this->html .= "<th class=\"tLeft\">FORMA DE PAGAMENTO</th>\n";
-		$this->html .= "<th class=\"tRight\">VALOR PAGO</th>\n";
+		$this->html .= "<th class=\"tRight\">VALOR PAGO (R$)</th>\n";
 		$this->html .= "</tr>\n";
 		$this->html .= self::pagamento($this->pag);
 		$this->html .= "</table>\n";
@@ -596,7 +608,16 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 				$pagHtml .= "</tr>\n";
 			}
 		} //fim foreach
-		return $pagHtml;
+
+        if (!empty($this->vTroco)) {
+            $vTroco = number_format($this->vTroco, 2, ",", ".");
+            $pagHtml .= "<tr>\n";
+            $pagHtml .= "<td class=\"tLeft\">Troco R$</td>\n";
+            $pagHtml .= "<td class=\"tRight\">{$vTroco}</td>\n";
+            $pagHtml .= "</tr>\n";
+        }
+
+        return $pagHtml;
 	}
 
 	/**
