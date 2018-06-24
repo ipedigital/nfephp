@@ -620,6 +620,21 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 			case '04':
 				$tBandNome = 'Sorocred';
 				break;
+			case '05':
+				$tBandNome = 'Diners Club';
+				break;
+			case '06':
+				$tBandNome = 'Elo';
+				break;
+			case '07':
+				$tBandNome = 'Hipercard';
+				break;
+			case '08':
+				$tBandNome = 'Aura';
+				break;
+			case '09':
+				$tBandNome = 'Cabal';
+				break;
 			case '99':
 				$tBandNome = 'Outros';
 			default:
@@ -663,6 +678,12 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 				break;
 			case '13':
 				$tPagNome = 'Vale Combustível';
+				break;
+			case '15':
+				$tPagNome = 'Boleto Bancário';
+				break;
+			case '90':
+				$tPagNome = 'Sem Pagamento';
 				break;
 			case '99':
 				$tPagNome = 'Outros';
