@@ -139,6 +139,7 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
         </style>";
 	protected $imgQRCode;
 	protected $urlQR = '';
+	protected $comprovantesTEF;
 
 	/**
 	 * __contruct
@@ -149,8 +150,10 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 	 * @param string $idToken
 	 * @param string $Token
 	 */
-	public function __construct($docXML = '', $sPathLogo = '', $mododebug = 0, $idToken = '', $emitToken = '', $urlQR = '')
+	public function __construct($docXML = '', $sPathLogo = '', $mododebug = 0, $idToken = '', $emitToken = '', $urlQR = '', $comprovantesTEF = [])
 	{
+	    $this->comprovantesTEF = $comprovantesTEF;
+
 		if (is_numeric($mododebug)) {
 			$this->debugMode = $mododebug;
 		}
@@ -570,6 +573,17 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 			$this->html .= "<br><hr><br>\n";
 			$this->html .= $html2via;
 		}
+
+		// Verificante se existem comprovantes de TEF a serem impressos
+        if (empty($this->comprovantesTEF) == FALSE) {
+            foreach ($this->comprovantesTEF as $comprovante) {
+                $this->html .= "<table width=\"100%\" class=\"noBorder\">\n";
+                $this->html .= "<tr>\n";
+                $this->html .= "<td><pre>{$comprovante}</pre></td>\n";
+                $this->html .= "</tr>\n";
+                $this->html .= "</table>\n";
+            }
+        }
 
 		$this->html .= "</body>\n</html>\n";
 		return $chNFe;
