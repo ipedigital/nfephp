@@ -1194,7 +1194,7 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
         if ($this->logoAlign !== 'F') {
             //Nome emitente
             $aFont = array('font'=>$this->fontePadrao, 'size'=>12, 'style'=>'B');
-            $texto = $this->emit->getElementsByTagName("xNome")->item(0)->nodeValue;
+            $texto = $this->pSimpleGetValue($this->emit, "xNome");
             $this->pTextBox($x1, $y1, $tw, 8, $texto, $aFont, 'T', 'C', 0, '');
             //endereço
             $y1 = $y1+5;

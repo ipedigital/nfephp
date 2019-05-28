@@ -73,7 +73,13 @@ class CommonNFePHP
         
         $vct = $theObj->getElementsByTagName($keyName)->item($itemNum);
         if (isset($vct)) {
-            return $extraTextBefore . trim($vct->nodeValue) . $extraTextAfter;
+            $value = trim($vct->nodeValue);
+            if (strpos($value, '&') !== FALSE) {
+                //existe um & na string, então deve ser uma entidade
+                $value = html_entity_decode($value);
+            }
+
+            return $extraTextBefore . $value . $extraTextAfter;
         }
         return '';
     }
