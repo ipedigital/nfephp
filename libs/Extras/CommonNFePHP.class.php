@@ -78,8 +78,8 @@ class CommonNFePHP
                 //existe um & na string, então deve ser uma entidade
                 $value = html_entity_decode($value);
             }
-
-            return $extraTextBefore . $value . $extraTextAfter;
+            $value = html_entity_decode(htmlspecialchars_decode($value), ENT_QUOTES);
+            return  $extraTextBefore . $value . $extraTextAfter;
         }
         return '';
     }
