@@ -407,13 +407,32 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 		//$valorProdutos = number_format($vProd, 2, ",", ".");
 		//$valorTotal = number_format($vNF, 2, ",", ".");
 
-		/*
-		 * Leiaute de Impressão DANFE NFC-e em acordo com
-		 * Manual Padrões Técnicos do DANFE-NFC-e e QR Code
-		 * Versão 3.4
-		 * Outubro 2015
-		 * Refatorado por: Chinnon Santos - 05/2016
-		*/
+        // Verificando se é nota fiscal do MS e inserindo
+        // informações sobre sorteio de Nota Fiscal Premiada
+        if (isset($this->nfeProc) && $cUF = 50) {
+            // 50 = código do Mato Grosso do Sul
+            $cMsg = $this->pSimpleGetValue($this->nfeProc, "cMsg");
+            $xMsg = $this->pSimpleGetValue($this->nfeProc, "xMsg");
+            if ($cMsg == '200' && !empty($xMsg)) {
+                if ($this->infAdFisco) {
+                    $this->infAdFisco .= '<br/>';
+                }
+                else {
+                    $this->infAdFisco = '';
+                }
+                $this->infAdFisco .= implode('<br/>',explode('|',$xMsg));
+            }
+        }
+
+        /*
+         * Leiaute de Impressão DANFE NFC-e em acordo com
+         * Manual Padrões Técnicos do DANFE-NFC-e e QR Code
+         * Versão 3.4
+         * Outubro 2015
+         * Refatorado por: Chinnon Santos - 05/2016
+        */
+
+
 
 		$this->html = "";
 		$this->html .= "<html>\n";
@@ -511,13 +530,16 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 			$this->html .= "<td colspan=\"3\"><strong>".
 				htmlspecialchars("EMITIDA EM AMBIENTE DE HOMOLOGAÇÃO – SEM VALOR FISCAL")."<strong></td>\n";
 			$this->html .= "</tr>\n";
-		} elseif (!empty($this->infAdFisco)) {
+		}
+
+		if (!empty($this->infAdFisco)) {
 			$this->html .= "<tr>\n";
 			$this->html .= "<td colspan=\"3\"><strong>".
-				htmlspecialchars("INFORMAÇÕES ADICIONAIS DE INTERESSE DO FISCO")."<strong></td>\n";
-			$this->html .= "<td colspan=\"3\">{$this->infAdFisco}</td>\n".
+				htmlspecialchars("INFORMAÇÕES ADICIONAIS DE INTERESSE DO FISCO")."<strong></td></tr>\n";
+			$this->html .= "<tr><td colspan=\"3\">{$this->infAdFisco}</td>\n";
 				$this->html .= "</tr>\n";
 		}
+
 		$this->html .= "</table>\n";
 
 		// -- Divisão VI – Informações de Identificação da NFC-e e do Protocolo de Autorização
