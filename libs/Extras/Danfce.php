@@ -409,7 +409,7 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 
         // Verificando se é nota fiscal do MS e inserindo
         // informações sobre sorteio de Nota Fiscal Premiada
-        if (isset($this->nfeProc) && $cUF = 50) {
+        if (isset($this->nfeProc) && $cUF == 50) {
             // 50 = código do Mato Grosso do Sul
             $cMsg = $this->pSimpleGetValue($this->nfeProc, "cMsg");
             $xMsg = $this->pSimpleGetValue($this->nfeProc, "xMsg");
