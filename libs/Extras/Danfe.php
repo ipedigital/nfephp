@@ -2814,7 +2814,17 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
         }
         $y += 2;
         $aFont = array('font'=>$this->fontePadrao, 'size'=>7, 'style'=>'');
+
         $this->pTextBox($x, $y, $w-2, $h-3, $texto, $aFont, 'T', 'L', 0, '', false);
+        if ($this->pSimpleGetValue($this->nfeProc, 'xMsg')) {
+            $texto =  $this->pSimpleGetValue($this->nfeProc, 'xMsg');
+
+            foreach(explode(' | ', $texto) as $linha) {
+                $y += 2.5;
+                $aFont = array('font'=>$this->fontePadrao, 'size'=>7, 'style'=>'');
+                $this->pTextBox($x, $y, $w-2, $h-3, $linha, $aFont, 'T', 'L', 0, '', false);
+            }
+        }
         return $y+$h;
     }
 
