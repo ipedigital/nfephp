@@ -739,6 +739,21 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 			case '15':
 				$tPagNome = 'Boleto Bancário';
 				break;
+			case '15':
+				$tPagNome = 'Boleto Bancário';
+				break;
+			case '16':
+				$tPagNome = 'Depósito Bancário';
+				break;
+			case '17':
+				$tPagNome = 'Boleto Bancário';
+				break;
+			case '18':
+				$tPagNome = 'Transferência bancária, Carteira Digital';
+				break;
+			case '19':
+				$tPagNome = 'Programa de fidelidade, Cashback, Crédito Virtual';
+				break;
 			case '90':
 				$tPagNome = 'Sem Pagamento';
 				break;
