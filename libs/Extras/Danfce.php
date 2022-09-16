@@ -489,7 +489,7 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 		$hasAD = false;
 		if ($vDesc != '0.00') {
 			$this->html .= "<tr>\n";
-			$this->html .= "<td class=\"tLeft\">".htmlspecialchars('Desconto R$')."</td>\n";
+			$this->html .= "<td class=\"tLeft\">".htmlspecialchars('Desconto Total R$')."</td>\n";
 			$this->html .= "<td class=\"tRight\">-".number_format($vDesc, 2, ',', '.')."</td>\n";
 			$this->html .= "</tr>\n";
 			$this->html .= "<tr>\n";
@@ -776,15 +776,15 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 		$itensHtml .= "<thead>\n";
 		$itensHtml .= "<tr>\n";
 		$itensHtml .= "<td>#</td>\n";
-		$itensHtml .= "<td>".htmlspecialchars('CÓDIGO')."</td>\n";
-		$itensHtml .= "<td colspan='3' class=\"tLeft\">".htmlspecialchars('DESCRIÇÃO')."</td>\n";
+		$itensHtml .= "<td align='left'>".htmlspecialchars('CÓDIGO')."</td>\n";
+		$itensHtml .= "<td colspan='3' align='left' class=\"tLeft\">".htmlspecialchars('DESCRIÇÃO')."</td>\n";
 		$itensHtml .= "</tr>\n";
 		$itensHtml .= "<tr>\n";
 		$itensHtml .= "<td></td>\n";
-		$itensHtml .= "<td class=\"tRight\">QTDE.</td>\n";
+		$itensHtml .= "<td align='right'>QTDE.</td>\n";
 		$itensHtml .= "<td>UN.</td>\n";
-		$itensHtml .= "<td class=\"tRight\">VL.UNIT.</td>\n";
-		$itensHtml .= "<td class=\"tRight\">VL.TOTAL</td>\n";
+		$itensHtml .= "<td align='right'>VL.UNIT.</td>\n";
+		$itensHtml .= "<td align='right'>VL.TOTAL</td>\n";
 		$itensHtml .= "</tr>\n";
 		$itensHtml .= "</thead>\n";
 		foreach ($det as $detI) {
@@ -809,6 +809,17 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 			$itensHtml .=  "<td class=\"tRight\">".htmlspecialchars($vUnCom)."</td>\n";
 			$itensHtml .=  "<td class=\"tRight\">$vProd</td>\n";
 			$itensHtml .=  "</tr>\n";
+            
+            $vDesc = $this->pSimpleGetValue($prod, "vDesc");
+            if (!empty($vDesc)) {
+                $vDesc = number_format($vDesc, 2, ",", ".");
+                $itensHtml .=  "<tr>\n";
+                $itensHtml .=  "<td class=\"tLeft\"></td>\n";
+                $itensHtml .=  "<td class=\"tLeft\" style='padding-bottom: 5px; font-style: italic'>Desconto</td>\n";
+                $itensHtml .=  "<td colspan='3' class=\"tRight\" style='padding-bottom: 5px; font-style: italic'>-$vDesc</td>\n";
+                $itensHtml .=  "</tr>\n";
+            }
+            
 		}
 		$itensHtml .= "</table>\n";
 		return $itensHtml;
