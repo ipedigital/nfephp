@@ -2614,7 +2614,7 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
                                 2,
                                 ",",
                                 "."
-                            ) : '0, 00';
+                            ) : '0,00';
                     $this->pTextBox($x, $y, $w11, $h, $texto, $aFont, 'T', $alinhamento, 0, '');
                 }
                 //Valor do ICMS
@@ -2626,7 +2626,7 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
                                 2,
                                 ",",
                                 "."
-                            ) : '0, 00';
+                            ) : '0,00';
                     $this->pTextBox($x, $y, $w12, $h, $texto, $aFont, 'T', $alinhamento, 0, '');
                 }
                 //Valor do IPI
@@ -2647,7 +2647,7 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
                                 2,
                                 ",",
                                 "."
-                            ) : '0, 00';
+                            ) : '0,00';
                     $this->pTextBox($x, $y, $w14, $h, $texto, $aFont, 'T', 'C', 0, '');
                 }
                 //%IPI
