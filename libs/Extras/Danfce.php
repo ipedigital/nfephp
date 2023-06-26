@@ -441,7 +441,7 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 		$this->html .= $this->css;
 		$this->html .= "</head>\n";
 		$this->html .= "<body>\n";
-
+		
 		// ***                                                    ***//
 		// *** Via Única ou Via do Consumidor em Modo Contigência ***//
 		// ***                                                    ***//
@@ -596,19 +596,43 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 			$this->html .= $html2via;
 		}
 
-		// Verificante se existem comprovantes de TEF a serem impressos
-        if (empty($this->comprovantesTEF) == FALSE) {
-            foreach ($this->comprovantesTEF as $comprovante) {
-                $this->html .= "<table width=\"100%\" class=\"noBorder\">\n";
-                $this->html .= "<tr>\n";
-                $this->html .= "<td><pre>{$comprovante}</pre></td>\n";
-                $this->html .= "</tr>\n";
-                $this->html .= "</table>\n";
-            }
-        }
-
 		$this->html .= "</body>\n</html>\n";
 		return $chNFe;
+	}
+	
+	public function getPageSize($html, $width, $margin)
+	{
+		$mpdf = new mPDF('', array($width, 841.89), 0, '', $margin, $margin, $margin, 0, 0, 'P');
+		$mpdf->useCoreFontsOnly = true;
+		$mpdf->WriteHTML($html, 0, true, false);
+		$height = $margin + $mpdf->y;
+		
+		return [
+			'sheet-size' => array($width, $height),
+			'orientation' => 'P',
+		];
+	}
+	
+	public function montaHTMLComprovante($comprovante)
+	{
+		if (empty($comprovante)) {
+			return '';
+		}
+		
+		$html = "<html>\n";
+		$html .= "<head>\n";
+		$html .= "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
+		$html .= $this->css;
+		$html .= "</head>\n";
+		$html .= "<body>\n";
+		$html .= "<table width=\"100%\" class=\"noBorder\">\n";
+		$html .= "<tr>\n";
+		$html .= "<td><pre>{$comprovante}</pre></td>\n";
+		$html .= "</tr>\n";
+		$html .= "</table>\n";
+		$html .= "</body>\n</html>\n";
+		
+		return $html;
 	}
 
 	/**
@@ -899,14 +923,27 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 		if ($output == 'pdf') {
 			//montagem do pdf
 			$m = 2.1; //Margens 2.1mm = 8px do formato HTML
-			if (is_array($this->papel) && strtolower($this->papel[1])=='one-page') {
-				$mpdf=new mPDF('', array($this->papel[0], 841.89), 0, '', $m, $m, $m, 0, 0, 'P');
-				$mpdf->useCoreFontsOnly = true;
-				$mpdf->WriteHTML($this->html, 0, true, false);
-				$this->papel=array($this->papel[0], $mpdf->y + $m);
+			$alturaVariavel = is_array($this->papel) && strtolower($this->papel[1])=='one-page';
+			if ($alturaVariavel) {
+				$pageSize = $this->getPageSize($this->html, $this->papel[0], $m);
+				$this->mpdf=new mPDF('', 'a4', 0, '', $m, $m, $m, 0, 0, 'P');
+				$this->mpdf->AddPageByArray($pageSize);
 			}
-			$this->mpdf=new mPDF('', $this->papel, 0, '', $m, $m, $m, 0, 0, 'P');
+			else {
+				$this->mpdf=new mPDF('', $this->papel, 0, '', $m, $m, $m, 0, 0, 'P');
+			}
+			
 			$this->mpdf->WriteHTML($this->html);
+			
+			if (empty($this->comprovantesTEF) == FALSE) {
+				foreach ($this->comprovantesTEF as $comprovante) {
+					$htmlComprovante = $this->montaHTMLComprovante($comprovante);
+					$pageSize = $this->getPageSize($htmlComprovante, $this->papel[0], $m);
+					$this->mpdf->AddPageByArray($pageSize);
+					$this->mpdf->WriteHTML($htmlComprovante);
+				}
+			}
+			
 			return $this->mpdf->Output($nome, $destino);
 		} else {
 			echo $this->html;
