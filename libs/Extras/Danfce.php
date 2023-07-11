@@ -596,6 +596,18 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 			$this->html .= $html2via;
 		}
 
+		// Verificante se existem comprovantes de TEF a serem impressos
+		if ((empty($this->comprovantesTEF) == FALSE) && data_get($this->comprovantesTEF, 'imprimir_mesma_pagina')) {
+			foreach (data_get($this->comprovantesTEF, 'comprovantes') as $comprovante) {
+				$this->html .= "<br/><br/><table width=\"100%\" class=\"noBorder\">\n";
+				$this->html .= "<tr>\n";
+				$this->html .= "<td><pre>{$comprovante}</pre></td>\n";
+				$this->html .= "</tr>\n";
+				$this->html .= "</table>\n";
+			}
+		}
+		
+		
 		$this->html .= "</body>\n</html>\n";
 		return $chNFe;
 	}
@@ -935,8 +947,8 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 			
 			$this->mpdf->WriteHTML($this->html);
 			
-			if (empty($this->comprovantesTEF) == FALSE) {
-				foreach ($this->comprovantesTEF as $comprovante) {
+			if ((empty($this->comprovantesTEF) == FALSE) && (data_get($this->comprovantesTEF, 'imprimir_mesma_pagina') == FALSE)) {
+				foreach (data_get($this->comprovantesTEF, 'comprovantes') as $comprovante) {
 					$htmlComprovante = $this->montaHTMLComprovante($comprovante);
 					$pageSize = $this->getPageSize($htmlComprovante, $this->papel[0], $m);
 					$this->mpdf->AddPageByArray($pageSize);
