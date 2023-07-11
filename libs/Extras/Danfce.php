@@ -956,6 +956,7 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 				}
 			}
 			
+			
 			return $this->mpdf->Output($nome, $destino);
 		} else {
 			echo $this->html;
