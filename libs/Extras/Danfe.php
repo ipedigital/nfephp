@@ -1482,11 +1482,7 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
             $this->pdf->SetTextColor(0, 0, 0);
         } else {
             $x = 10;
-            if ($this->orientacao == 'P') {
-                $y = round($this->hPrint*2/3, 0);
-            } else {
-                $y = round($this->hPrint/2, 0);
-            }//fim orientacao
+            $y = round($this->hPrint/2, 0);
             $h = 5;
             $w = $maxW-(2*$x);
             $this->pdf->SetTextColor(90, 90, 90);
@@ -1500,20 +1496,13 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
                 $texto = "devido à problemas técnicos";
                 $this->pTextBox($x, $y+12, $w, $h, $texto, $aFont, 'C', 'C', 0, '');
             } else {
-                if (!isset($this->nfeProc)) {
-                    if (!$this->pNotaDPEC()) {
-                        $texto = "SEM VALOR FISCAL";
-                        $aFont = array('font'=>$this->fontePadrao, 'size'=>48, 'style'=>'B');
-                        $this->pTextBox($x, $y, $w, $h, $texto, $aFont, 'C', 'C', 0, '');
-                    }
-                    $aFont = array('font'=>$this->fontePadrao, 'size'=>30, 'style'=>'B');
-                    $texto = "FALTA PROTOCOLO DE APROVAÇÃO DA SEFAZ";
-                    if (!$this->pNotaDPEC()) {
-                        $this->pTextBox($x, $y+12, $w, $h, $texto, $aFont, 'C', 'C', 0, '');
-                    } else {
-                        $this->pTextBox($x, $y+25, $w, $h, $texto, $aFont, 'C', 'C', 0, '');
-                    }
-                }//fim nefProc
+                $texto = "ESPELHO";
+                $aFont = array('font' => 'Times', 'size' => 72, 'style' => 'B');
+                $this->pTextBox90($x, $y, $w, $h, $texto, $aFont, 'C', 'C', 0, '', true, 0, 0, -25);
+
+                $aFont = array('font'=>'Times', 'size'=>72, 'style'=>'B');
+                $texto = "SEM VALOR FISCAL";
+                $this->pTextBox90($x, $y+24, $w, $h, $texto, $aFont, 'C', 'C', 0, '', true, 0, 0, -25);
             }//fim tpEmis
             $this->pdf->SetTextColor(0, 0, 0);
         }

@@ -445,6 +445,7 @@ class CommonNFePHP
      * se falso mantem o tamanho do fonte e usa quantas linhas forem necessárias
      * @param  number  $hmax
      * @param  number  $vOffSet incremento forçado na na posição Y
+     * @param  number $rotate informação de quantos graus as informações serão rotacionadas
      * @return number $height Qual a altura necessária para desenhar esta textBox
      */
     protected function pTextBox90(
@@ -460,10 +461,11 @@ class CommonNFePHP
         $link = '',
         $force = true,
         $hmax = 0,
-        $vOffSet = 0
+        $vOffSet = 0,
+        $rotate = 90
     ) {
         //Rotacionado
-        $this->pdf->Rotate(90, $x, $y);
+        $this->pdf->Rotate($rotate, $x, $y);
         $oldY = $y;
         $temObs = false;
         $resetou = false;
