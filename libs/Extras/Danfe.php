@@ -1498,11 +1498,11 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
             } else {
                 $texto = "ESPELHO";
                 $aFont = array('font' => 'Times', 'size' => 72, 'style' => 'B');
-                $this->pTextBox90($x, $y, $w, $h, $texto, $aFont, 'C', 'C', 0, '', true, 0, 0, -25);
+                $this->pTextBox($x, $y, $w, $h, $texto, $aFont, 'C', 'C', 0, '');
 
                 $aFont = array('font'=>'Times', 'size'=>72, 'style'=>'B');
                 $texto = "SEM VALOR FISCAL";
-                $this->pTextBox90($x, $y+24, $w, $h, $texto, $aFont, 'C', 'C', 0, '', true, 0, 0, -25);
+                $this->pTextBox($x, $y+24, $w, $h, $texto, $aFont, 'C', 'C', 0, '');
             }//fim tpEmis
             $this->pdf->SetTextColor(0, 0, 0);
         }
