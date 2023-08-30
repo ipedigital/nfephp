@@ -1495,7 +1495,7 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
                 $aFont = array('font'=>$this->fontePadrao, 'size'=>30, 'style'=>'B');
                 $texto = "devido à problemas técnicos";
                 $this->pTextBox($x, $y+12, $w, $h, $texto, $aFont, 'C', 'C', 0, '');
-            } else {
+            } elseif(!isset($this->nfeProc)) {
                 $texto = "ESPELHO";
                 $aFont = array('font' => 'Times', 'size' => 72, 'style' => 'B');
                 $this->pTextBox($x, $y+24, $w, $h, $texto, $aFont, 'C', 'C', 0, '');
