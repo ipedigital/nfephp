@@ -601,7 +601,7 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 			foreach (data_get($this->comprovantesTEF, 'comprovantes') as $comprovante) {
 				$this->html .= "<br/><br/><table width=\"100%\" class=\"noBorder\">\n";
 				$this->html .= "<tr>\n";
-				$this->html .= "<td><pre>{$comprovante}</pre></td>\n";
+				$this->html .= "<td class=\"tLeft\"><pre>{$comprovante}</pre></td>\n";
 				$this->html .= "</tr>\n";
 				$this->html .= "</table>\n";
 			}
@@ -639,7 +639,7 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 		$html .= "<body>\n";
 		$html .= "<table width=\"100%\" class=\"noBorder\">\n";
 		$html .= "<tr>\n";
-		$html .= "<td><pre>{$comprovante}</pre></td>\n";
+		$html .= "<td class=\"tLeft\"><pre>{$comprovante}</pre></td>\n";
 		$html .= "</tr>\n";
 		$html .= "</table>\n";
 		$html .= "</body>\n</html>\n";
