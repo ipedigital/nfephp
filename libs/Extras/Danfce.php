@@ -612,12 +612,16 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 		return $chNFe;
 	}
 	
-	public function getPageSize($html, $width, $margin)
+	public function getPageSize($html, $width, $marginH, $marginV)
 	{
-		$mpdf = new mPDF('', array($width, 841.89), 0, '', $margin, $margin, $margin, 0, 0, 'P');
+		$mpdf = new mPDF('', array($width, 841.89), 0, '', $marginH, $marginH, $marginV, 0, 0, 'P');
 		$mpdf->useCoreFontsOnly = true;
 		$mpdf->WriteHTML($html, 0, true, false);
-		$height = $margin + $mpdf->y;
+		$height = $marginV + $mpdf->y;
+		
+		if ($height < $width) {
+			$height = $width + 10;
+		}
 		
 		return [
 			'sheet-size' => array($width, $height),
@@ -639,7 +643,7 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 		$html .= "<body>\n";
 		$html .= "<table width=\"100%\" class=\"noBorder\">\n";
 		$html .= "<tr>\n";
-		$html .= "<td class=\"tLeft\"><pre>{$comprovante}</pre></td>\n";
+		$html .= "<td class=\"tLeft\" style='border: 1px solid black; font-size: 8pt; padding: 0.5cm'><pre>{$comprovante}</pre></td>\n";
 		$html .= "</tr>\n";
 		$html .= "</table>\n";
 		$html .= "</body>\n</html>\n";
@@ -934,15 +938,16 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 	{
 		if ($output == 'pdf') {
 			//montagem do pdf
-			$m = 2.1; //Margens 2.1mm = 8px do formato HTML
+			$mV = 2.1; //Margens 2.1mm = 8px do formato HTML
+			$mH = 5;
 			$alturaVariavel = is_array($this->papel) && strtolower($this->papel[1])=='one-page';
 			if ($alturaVariavel) {
-				$pageSize = $this->getPageSize($this->html, $this->papel[0], $m);
-				$this->mpdf=new mPDF('', 'a4', 0, '', $m, $m, $m, 0, 0, 'P');
+				$pageSize = $this->getPageSize($this->html, $this->papel[0], $mH, $mV);
+				$this->mpdf=new mPDF('', 'a4', 0, '', $mH, $mH, $mV, 0, 0, 'P');
 				$this->mpdf->AddPageByArray($pageSize);
 			}
 			else {
-				$this->mpdf=new mPDF('', $this->papel, 0, '', $m, $m, $m, 0, 0, 'P');
+				$this->mpdf=new mPDF('', $this->papel, 0, '', $mH, $mH, $mV, 0, 0, 'P');
 			}
 			
 			$this->mpdf->WriteHTML($this->html);
@@ -950,7 +955,7 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 			if ((empty($this->comprovantesTEF) == FALSE) && (data_get($this->comprovantesTEF, 'imprimir_mesma_pagina') == FALSE)) {
 				foreach (data_get($this->comprovantesTEF, 'comprovantes') as $comprovante) {
 					$htmlComprovante = $this->montaHTMLComprovante($comprovante);
-					$pageSize = $this->getPageSize($htmlComprovante, $this->papel[0], $m);
+					$pageSize = $this->getPageSize($htmlComprovante, $this->papel[0], $mH, $mV);
 					$this->mpdf->AddPageByArray($pageSize);
 					$this->mpdf->WriteHTML($htmlComprovante);
 				}
