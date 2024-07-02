@@ -783,7 +783,7 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 				$tPagNome = 'Depósito Bancário';
 				break;
 			case '17':
-				$tPagNome = 'Pagamento Instantâneo (PIX)';
+				$tPagNome = 'Pagamento Instantâneo (PIX) - Dinâmico';
 				break;
 			case '18':
 				$tPagNome = 'Transferência bancária, Carteira Digital';
@@ -791,6 +791,9 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
 			case '19':
 				$tPagNome = 'Programa de fidelidade, Cashback, Crédito Virtual';
 				break;
+            case '20':
+                $tPagNome = 'Pagamento Instantâneo (PIX) - Estático';
+                break;
 			case '90':
 				$tPagNome = 'Sem Pagamento';
 				break;
